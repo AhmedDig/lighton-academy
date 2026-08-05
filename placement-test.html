@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lighton Academy | Placement Test</title>
+    <link rel="icon" href="assets/img/logo.png" type="image/png">
+    <meta property="og:image" content="assets/img/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
+    <script src="assets/js/cookie-consent.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Navigation placeholder (loaded by load-nav.js) -->
+    <div id="nav-placeholder"></div>
+
+    <main id="main-content">
+        <div class="container" style="max-width: 800px; margin: 2rem auto;">
+
+            <!-- === LEAD FORM (shown first) === -->
+            <div id="leadFormContainer" class="card" style="padding: 2rem;">
+                <h1 data-i18n="placement_title">Placement Assessment</h1>
+                <p data-i18n="placement_intro">Welcome! Please enter your details before starting the test.</p>
+                <form id="leadForm">
+                    <div class="form-group">
+                        <label data-i18n="full_name">Full Name</label>
+                        <input type="text" id="leadName" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label data-i18n="email">Email Address</label>
+                        <input type="email" id="leadEmail" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label data-i18n="phone">Phone Number</label>
+                        <input type="tel" id="leadPhone" class="form-input" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" data-i18n="start_test">Start Test</button>
+                </form>
+            </div>
+
+            <!-- === TEST CONTAINER (hidden initially) === -->
+            <div id="testContainer" style="display: none;">
+                <!-- Fixed timer -->
+                <div class="timer" id="timerDisplay"
+                    style="position: fixed; top: 100px; right: 20px; background: var(--primary); color: white; padding: 10px 20px; border-radius: 50px; font-weight: bold; z-index: 1000;">
+                    15:00
+                </div>
+
+                <div id="sectionHeader"></div>
+                <div id="questionsContainer"></div>
+                <button id="nextSectionBtn" class="btn btn-primary" data-i18n="next_section">Next Section</button>
+            </div>
+
+            <!-- === RESULT (shown after test finishes) === -->
+            <div id="resultContainer" style="display: none; text-align: center;" class="card">
+                <h1 data-i18n="your_result">Your Placement Result</h1>
+                <p id="resultText"></p>
+                <p id="levelText"></p>
+                <a href="index.html" class="btn btn-primary" data-i18n="go_home">Return to Home</a>
+            </div>
+
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Toast container -->
+    <div id="toast-container"
+        style="position: fixed; top: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px;">
+    </div>
+
+    <script src="assets/js/i18n.js"></script> <!-- loads first -->
+    <script src="assets/js/load-components.js"></script> <!-- loads after -->
+    <script src="assets/js/placement.js"></script>
+</body>
+
+</html>

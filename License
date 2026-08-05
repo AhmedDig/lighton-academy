@@ -1,0 +1,36 @@
+
+---
+
+## 3. Full File List to Upload (Directory Structure)
+
+Create this exact folder structure locally, then drag/drop or `git add .` everything. I have **omitted** the obsolete `navigation.js` and any old PHP files, per our previous cleanups.
+
+```text
+lighton-static/
+├── index.html
+├── courses.html
+├── results.html
+├── about.html
+├── contact.html
+├── placement-test.html
+├── placement-result.html
+├── privacy.html
+├── terms.html
+├── .gitignore
+├── README.md
+├── assets/
+│   ├── css/
+│   │   └── main.css          (Contains your desktop+mobile nav & carousel)
+│   ├── js/
+│   │   ├── i18n.js           (Translations and language switching)
+│   │   ├── load-components.js (Fetches nav & footer, handles active tabs)
+│   │   ├── cardloader.js     (Populates courses & testimonials)
+│   │   ├── placement.js      (Placement test logic & lead submission)
+│   │   └── cookie-consent.js (GDPR/EU cookie banner logic)
+│   ├── img/                  (All your logos, hero images, icons)
+│   │   ├── logo.png
+│   │   ├── hero-bg.webp
+│   │   └── hero-bg-ar.webp
+└── includes/
+    ├── navigation.html       (Desktop navigation. No hamburger button)
+    └── footer.html           (Contains the mobile bottom nav & footer content)

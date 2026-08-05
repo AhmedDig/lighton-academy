@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lighton Academy | Placement Results</title>
+    <link rel="icon" href="assets/img/logo.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
+    <script src="assets/js/cookie-consent.js" defer></script>
+</head>
+
+<body>
+    <div id="nav-placeholder"></div>
+
+    <main>
+        <div class="container" style="max-width: 600px; margin: 3rem auto;">
+            <div class="card" style="text-align: center;">
+                <h1 data-i18n="your_result">Your Placement Result</h1>
+                <p id="scoreDisplay"></p>
+                <p id="levelDisplay"></p>
+                <div id="sectionScores"></div>
+                <p data-i18n="teacher_contact">A teacher will contact you soon for a short speaking confirmation.</p>
+                <a href="/" class="btn btn-primary" data-i18n="go_home">Return to Home</a>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="assets/js/i18n.js"></script> <!-- loads first -->
+    <script src="assets/js/load-components.js"></script> <!-- loads after -->
+    <script>
+        // Read score and level from URL query params
+        const params = new URLSearchParams(window.location.search);
+        const score = params.get('score') || '0';
+        const total = params.get('total') || '60';
+        const level = params.get('level') || 'A1';
+        const sectionScores = params.get('sectionScores') || '';
+        const sections = ['Grammar', 'Vocabulary', 'Listening', 'Reading'];
+
+        document.getElementById('scoreDisplay').textContent = `You answered ${score} out of ${total} correctly.`;
+        document.getElementById('levelDisplay').textContent = `Your estimated level: ${level}`;
+
+        // Display per-section scores
+        const sectionDiv = document.getElementById('sectionScores');
+        if (sectionDiv && sectionScores) {
+            const scores = sectionScores.split(',').map(Number);
+            let html = '<h3 style="margin-top: 1.5rem; margin-bottom: 0.5rem;">Section Breakdown:</h3><ul style="list-style: none; padding: 0; margin: 0 auto; max-width: 250px; text-align: left; display: flex; flex-direction: column; gap: 0.25rem;">';
+            sections.forEach((name, i) => {
+                html += `<li><strong>${name}:</strong> ${scores[i] || 0} / 15</li>`;
+            });
+            html += '</ul>';
+            sectionDiv.innerHTML = html;
+        }
+    </script>
+</body>
+
+</html>

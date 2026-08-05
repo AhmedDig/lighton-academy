@@ -1,0 +1,5 @@
+User-agent: *
+Disallow:
+
+# Point to your sitemap so Google can find it
+Sitemap: https://lighton-academy.pages.dev/sitemap.xml

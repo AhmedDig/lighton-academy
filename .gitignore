@@ -1,0 +1,12 @@
+# System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local Environment & Secrets (just in case)
+.env
+*.log
+*.local
+
+# Node Modules (if you ever added a package.json for tools)
+node_modules/
