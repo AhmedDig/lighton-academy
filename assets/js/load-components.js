@@ -3,14 +3,24 @@
 document.addEventListener('DOMContentLoaded', function () {
     const lang = localStorage.getItem('lighton_lang') || 'en';
 
-    // ===== Helper: Get the current page filename =====
-    // Strips leading/trailing slashes. If empty (homepage), returns 'index.html'.
+    // ===== Helper: Get the current page's base filename (without .html) =====
     function getCurrentPage() {
         let path = window.location.pathname.replace(/^\/|\/$/g, '');
-        if (path === '') path = 'index.html';
-        // If deployed in a subfolder (e.g., '/lighton/courses.html'),
-        // you may want to strip the subfolder part. For now we assume root level.
+        // If empty, it's the homepage
+        if (path === '') return 'index';
+        // Strip any trailing .html if present
+        if (path.endsWith('.html')) path = path.slice(0, -5);
         return path;
+    }
+
+    // ===== Helper: Get a link's target filename (without .html) =====
+    function getLinkPage(link) {
+        let href = link.getAttribute('href');
+        if (!href) return '';
+        // Remove any query strings or hash
+        href = href.split('?')[0].split('#')[0];
+        if (href.endsWith('.html')) href = href.slice(0, -5);
+        return href;
     }
 
     // ===== Load Navigation (desktop) =====
@@ -29,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 // ✅ Set active desktop navigation link
                 const currentPage = getCurrentPage();
                 document.querySelectorAll('.main-navigation .nav-link').forEach(link => {
-                    const linkPage = link.getAttribute('href');
+                    const linkPage = getLinkPage(link);
                     link.classList.remove('active');
                     if (linkPage === currentPage) {
                         link.classList.add('active');
@@ -53,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 // ✅ Set active mobile navigation link
                 const currentPage = getCurrentPage();
                 document.querySelectorAll('#mobile-nav .nav-link').forEach(link => {
-                    const linkPage = link.getAttribute('href');
+                    const linkPage = getLinkPage(link);
                     link.classList.remove('active');
                     if (linkPage === currentPage) {
                         link.classList.add('active');
