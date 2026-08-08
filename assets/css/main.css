@@ -99,7 +99,6 @@ svg {
     text-decoration: none;
     color: var(--text-dark);
     font-weight: 900;
-    padding: var(--spacing-sm);
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
@@ -115,18 +114,11 @@ svg {
 .mobile-nav {
     position: fixed;
     display: none;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
     bottom: 0;
     left: 0;
     width: 100%;
     background: var(--bg-light);
     box-shadow: var(--shadow-sm);
-    z-index: 1000;
-    flex-wrap: nowrap;
-    justify-content: space-around;
-    padding: var(--spacing-sm) var(--spacing-md);
 }
 
 .mobile-nav .nav-link {
@@ -140,10 +132,12 @@ svg {
 
 .lang-switcher {
     position: relative;
+    cursor: pointer;
 }
 
 .mobile-lang-switcher {
     position: relative;
+    cursor: pointer;
 }
 
 .lang-bar {
@@ -151,10 +145,17 @@ svg {
     position: absolute;
     background-color: var(--bg-light);
     min-width: 130px;
+    right: 0;
+    left: auto;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     padding: var(--spacing-md);
     z-index: 1;
     border-radius: var(--radius-md);
+}
+
+[dir="rtl"] .lang-bar {
+    left: 0;
+    right: auto;
 }
 
 .lang-bar a {
@@ -983,8 +984,11 @@ input:focus {
     /* ===== NAVIGATION ===== */
     .mobile-nav {
         display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: nowrap;
         height: 10dvh;
-        width: 100%;
         border-bottom: 1dvh solid var(--primary-soft);
         transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         z-index: 5;
@@ -1015,15 +1019,39 @@ input:focus {
         right: auto;
     }
 
+    .nav-link,
+    .nav-link:hover {
+        padding: var(--spacing-lg) !important;
+        box-shadow: none;
+    }
+
     .nav-link.active {
+        position: relative;
+        /* Anchor for the pseudo-element */
         color: var(--accent);
         box-shadow: none;
-        font-size: 5dvh;
         padding: var(--spacing-lg);
-        background: var(--primary-soft);
-        border-radius: 11dvh 11dvh 0 0;
-        transform: translateY(-0.5dvh);
         z-index: 6;
+        height: 100%;
+        /* Ensures the link fills the nav bar vertically */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* The Facebook‑style indicator */
+    .nav-link.active::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        height: 0.5dvh;
+        background-color: var(--accent);
+        border-radius: 0 0 4px 4px;
+        z-index: 7;
     }
 
     /* ===== SECTIONS & GRIDS ===== */

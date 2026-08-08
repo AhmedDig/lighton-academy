@@ -3,7 +3,17 @@
 document.addEventListener('DOMContentLoaded', function () {
     const lang = localStorage.getItem('lighton_lang') || 'en';
 
-    // --- Load Navigation (desktop) ---
+    // ===== Helper: Get the current page filename =====
+    // Strips leading/trailing slashes. If empty (homepage), returns 'index.html'.
+    function getCurrentPage() {
+        let path = window.location.pathname.replace(/^\/|\/$/g, '');
+        if (path === '') path = 'index.html';
+        // If deployed in a subfolder (e.g., '/lighton/courses.html'),
+        // you may want to strip the subfolder part. For now we assume root level.
+        return path;
+    }
+
+    // ===== Load Navigation (desktop) =====
     const navPlaceholder = document.getElementById('nav-placeholder');
     if (navPlaceholder) {
         fetch('includes/navigation.html')
@@ -16,9 +26,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     FontAwesome.dom.i2svg();
                 }
 
-                // ✅ Set active navigation link based on current URL (desktop)
-                const currentPage = window.location.pathname.split('/').pop();
-                document.querySelectorAll('.nav-link').forEach(link => {
+                // ✅ Set active desktop navigation link
+                const currentPage = getCurrentPage();
+                document.querySelectorAll('.main-navigation .nav-link').forEach(link => {
                     const linkPage = link.getAttribute('href');
                     link.classList.remove('active');
                     if (linkPage === currentPage) {
@@ -32,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(err => console.error('Navigation load error:', err));
     }
 
-    // --- Load Footer (includes the mobile bottom nav) ---
+    // ===== Load Footer (includes the mobile bottom nav) =====
     const footerPlaceholder = document.getElementById('footer-placeholder');
     if (footerPlaceholder) {
         fetch('includes/footer.html')
@@ -40,8 +50,8 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(html => {
                 footerPlaceholder.innerHTML = html;
 
-                // ✅ Set active navigation link for the bottom mobile nav
-                const currentPage = window.location.pathname.split('/').pop();
+                // ✅ Set active mobile navigation link
+                const currentPage = getCurrentPage();
                 document.querySelectorAll('#mobile-nav .nav-link').forEach(link => {
                     const linkPage = link.getAttribute('href');
                     link.classList.remove('active');
